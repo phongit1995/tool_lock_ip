@@ -13,6 +13,7 @@ interface CreateCode {
     phone: string
     avatar: File | '';
     bg: File | '';
+    active: boolean;
 }
 function AddCode({ open, handleClose, handleResetList }: { open: boolean, handleClose: () => void, handleResetList: () => void }) {
     const [loading, setLoading] = useState(false)
@@ -31,6 +32,8 @@ function AddCode({ open, handleClose, handleResetList }: { open: boolean, handle
         formData.append('fullName', data.fullName)
         formData.append('message', data.message)
         formData.append('phone', data.phone)
+        formData.append('active', data.active? '1': '0');
+        console.log('active',data.active? 1: 0);
         apiService('post', API_PATHS.UPLOAD, formData, '', true)
             .then(() => {
                 toast.success('Create code success');
@@ -108,6 +111,18 @@ function AddCode({ open, handleClose, handleResetList }: { open: boolean, handle
                     )}
                 />
                 {errors.phone && <Typography sx={{ color: 'red', fontSize: '12px', }}>This field is required</Typography>}
+            </Box>
+            <Box sx={{ marginBottom: '15px', marginLeft: '7px' }}>
+                Active:
+                <Controller
+                    name="active"
+                    defaultValue={true}
+                    control={control}
+                    render={({ field }: any) => (
+                        <Checkbox {...field} />
+                    )}
+                />
+                {errors.active && <Typography sx={{ color: 'red', fontSize: '12px', }}>This field is required</Typography>}
             </Box>
             <Box sx={{ marginBottom: '15px' }}>
                 <label>Avatar: </label>

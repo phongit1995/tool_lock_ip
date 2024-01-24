@@ -97,6 +97,7 @@ export default function AdminZalo() {
                             <TableCell >Message</TableCell>
                             <TableCell >FullName</TableCell>
                             <TableCell >Phone</TableCell>
+                            <TableCell sx={{ padding: '10px 5px ' }}>Active</TableCell>
                             <TableCell >Avatar</TableCell>
                             <TableCell >Background</TableCell>
                             <TableCell ><Button onClick={() => {
@@ -116,6 +117,7 @@ export default function AdminZalo() {
                                 <TableCell sx={{ padding: '10px 5px ' }}>{row?.message}</TableCell>
                                 <TableCell sx={{ padding: '10px 5px ' }}>{row?.fullName}</TableCell>
                                 <TableCell sx={{ padding: '10px 5px ' }}>{row?.phone}</TableCell>
+                                <TableCell sx={{ padding: '10px 5px ' }}>{<Button color='success' size='small' variant='contained' disabled={!row?.active}>Active</Button>}</TableCell>
                                 <TableCell sx={{ padding: '10px 5px ' }}><img width={50} src={row?.avatar} alt='' /></TableCell>
                                 <TableCell sx={{ padding: '10px 5px ' }}><img width={50} src={row?.bg} alt='' /></TableCell>
 
