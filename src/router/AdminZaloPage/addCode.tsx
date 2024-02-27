@@ -119,7 +119,7 @@ function AddCode({ open, handleClose, handleResetList }: { open: boolean, handle
                     defaultValue={true}
                     control={control}
                     render={({ field }: any) => (
-                        <Checkbox {...field} />
+                        <Checkbox {...field} defaultChecked />
                     )}
                 />
                 {errors.active && <Typography sx={{ color: 'red', fontSize: '12px', }}>This field is required</Typography>}

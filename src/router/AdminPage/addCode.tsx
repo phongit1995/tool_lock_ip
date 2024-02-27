@@ -8,7 +8,8 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 interface CreateCode {
     code: string
-    message: string
+    message: string;
+    active: boolean;
 }
 function AddCode({ open, handleClose, handleResetList }: { open: boolean, handleClose: () => void, handleResetList: () => void }) {
     const [loading, setLoading] = useState(false)
@@ -73,6 +74,18 @@ function AddCode({ open, handleClose, handleResetList }: { open: boolean, handle
                     )}
                 />
                 {errors.message && <Typography sx={{ color: 'red', fontSize: '12px', }}>This field is required</Typography>}
+            </Box>
+            <Box sx={{ marginBottom: '15px', marginLeft: '7px' }}>
+                Active:
+                <Controller
+                    name="active"
+                    defaultValue={true}
+                    control={control}
+                    render={({ field }: any) => (
+                        <Checkbox {...field} defaultChecked />
+                    )}
+                />
+                {errors.active && <Typography sx={{ color: 'red', fontSize: '12px', }}>This field is required</Typography>}
             </Box>
 
         </DialogContent>

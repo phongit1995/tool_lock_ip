@@ -94,7 +94,7 @@ export default function Admin() {
                         <TableRow>
                             <TableCell >Code id</TableCell>
                             <TableCell >Message</TableCell>
-
+                            <TableCell sx={{ padding: '10px 5px ' }}>Active</TableCell>
                             <TableCell ><Button onClick={() => {
                                 setOpenModal(true)
                             }} color='primary' variant='contained' ><AddIcon /></Button></TableCell>
@@ -110,7 +110,7 @@ export default function Admin() {
                                     {row?.code}
                                 </TableCell >
                                 <TableCell sx={{ padding: '10px 5px ' }}>{row?.message}</TableCell>
-
+                                <TableCell sx={{ padding: '10px 5px ' }}>{<Button color='success' size='small' variant='contained' disabled={!row?.active}>Active</Button>}</TableCell>
                                 <TableCell ><LoadingButton loading={loading && currentId === row?._id} color='error' onClick={() => handleDeleteCode(row?._id)} variant='contained'><DeleteIcon /></LoadingButton></TableCell>
                             </TableRow>
                         ))}
