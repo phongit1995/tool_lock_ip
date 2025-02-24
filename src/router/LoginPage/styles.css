@@ -1,0 +1,7 @@
+/* Add any custom styles here */
+.wrapper {
+  min-height: 100vh;
+}
+
+/* You might want to import Bootstrap CSS */
+@import 'bootstrap/dist/css/bootstrap.min.css'; 
