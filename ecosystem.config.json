@@ -1,7 +1,7 @@
 {
     "apps": [
       {
-        "name": "nghe-len",
+        "name": "tool-lock-iphone",
         "script": "server.js",
         "merge_logs": true,
         "env": {

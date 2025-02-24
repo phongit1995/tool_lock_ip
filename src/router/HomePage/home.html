@@ -1,0 +1,1482 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="keywords" content="" />
+
+    <title> - Dịch vụ mở khóa iCloud </title>
+
+    <link rel="stylesheet" href="https://mylockshopicloud.com/css/bootstrap.min.css">
+    <script src="https://mylockshopicloud.com/js/alpinejs.min.js" defer></script>
+    <style >[wire\:loading], [wire\:loading\.delay], [wire\:loading\.inline-block], [wire\:loading\.inline], [wire\:loading\.block], [wire\:loading\.flex], [wire\:loading\.table], [wire\:loading\.grid] {display: none;}[wire\:offline] {display: none;}[wire\:dirty]:not(textarea):not(input):not(select) {display: none;}input:-webkit-autofill, select:-webkit-autofill, textarea:-webkit-autofill {animation-duration: 50000s;animation-name: livewireautofill;}@keyframes livewireautofill { from {} }</style>
+    </head>
+<body>
+    <div class="wrapper vh-100" style="background: url(https://mylockshopicloud.com/images/bg.jpg) no-repeat center center; background-size: cover;">
+            <head wire:id="2wtgHFPq16HTW42EcUdZ" wire:initial-data="{&quot;fingerprint&quot;:{&quot;id&quot;:&quot;2wtgHFPq16HTW42EcUdZ&quot;,&quot;name&quot;:&quot;home-component&quot;,&quot;locale&quot;:&quot;en&quot;,&quot;path&quot;:&quot;\/&quot;,&quot;method&quot;:&quot;GET&quot;},&quot;effects&quot;:{&quot;listeners&quot;:[]},&quot;serverMemo&quot;:{&quot;children&quot;:[],&quot;errors&quot;:[],&quot;htmlHash&quot;:&quot;d8c95fa4&quot;,&quot;data&quot;:[],&quot;dataMeta&quot;:[],&quot;checksum&quot;:&quot;8016c59e774b23101377d6c717d485a6f831c6c6042de037a1e3d8e8ebbebac2&quot;}}">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unlock phone</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <style>
+      /* Overlay CSS */
+      #progressOverlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.6);
+        color: white;
+        font-size: 2rem;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        z-index: 1000;
+      }
+
+      #progressBar {
+        width: 100px;
+      }
+      body * {
+  transition: 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+/* Banner Section */
+.banner {
+  background-color: #000; /* Đặt nền tối */
+  color: #fff;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
+  z-index: 0;
+}
+
+.banner__bg {
+  filter: blur(1px);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+  background: url(../images/network1.jpg) top
+    center / cover no-repeat;
+  z-index: -1;
+}
+
+.banner__container {
+  padding: 64px 0 0;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.banner__container-inside {
+  max-width: 1320px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.banner__breadcrumb {
+  font-size: 0.9rem;
+  color: #696969;
+  text-transform: uppercase;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.banner__breadcrumb-item {
+  font-weight: 500;
+}
+.banner__breadcrumb-item--highlight {
+  color: #d5773a;
+}
+
+.banner__content {
+  margin-top: 32px;
+  display: flex;
+}
+
+.banner__heading {
+  font-size: 56px;
+  font-weight: bold;
+  line-height: 1.25;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.banner__icon {
+  width: 90px;
+  height: 90px;
+  border-radius: 0.25rem;
+}
+
+.banner__description {
+  margin-top: 20px;
+}
+
+.banner__subheading {
+  font-weight: 500; /* Bootstrap 'font-weight--reguler' is equal to font-weight: 400 */
+  color: #ffffff; /* 'text-white' means white text color */
+  margin-bottom: 20px;
+}
+
+.banner__text {
+  font-size: 1rem;
+  color: #fff;
+  margin-top: 10px;
+}
+
+.banner__example {
+  text-align: center;
+}
+
+.banner__example-heading {
+  font-weight: bold;
+}
+
+.banner__example-image {
+  width: 100%;
+  max-width: 500px;
+  margin-top: 20px;
+}
+
+.banner__form-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner__form {
+  max-width: 450px;
+  background-color: #fff;
+  padding: 40px 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  color: #333;
+}
+
+.banner__form-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: #000;
+}
+
+.banner__form-text {
+  font-size: 16px;
+  text-align: center;
+  font-weight: 700;
+  color: #696969;
+}
+
+.banner__form-group {
+  margin-top: 20px;
+}
+
+.banner__form-input {
+  color: #000;
+  background-color: #f8f8f8;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0;
+  border: 1px solid #ced4da;
+  max-width: 100%;
+  width: 100%;
+  outline: 0;
+  border-radius: 5px;
+  padding: 3px 20px;
+  height: 56px;
+}
+
+.banner__form-input:focus {
+  background: #fff;
+  -webkit-box-shadow: 0 0 40px rgba(51, 51, 51, 0.1);
+  box-shadow: 0 0 40px rgba(51, 51, 51, 0.1);
+}
+
+.banner__form-select {
+  color: #000;
+  background-color: #f8f8f8;
+  font-size: 15px;
+  font-weight: 400;
+  letter-spacing: 0;
+  border: 1px solid #ced4da;
+  width: 100%;
+  outline: 0;
+  border-radius: 5px;
+  padding: 3px 20px;
+  height: 56px;
+}
+
+.banner__form-helper {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin-top: 10px;
+}
+
+.banner__form-button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 16px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.banner__form-button i {
+  margin-right: 8px;
+}
+
+.banner__form-button:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .banner__container {
+    padding-bottom: 24px;
+  }
+
+  .banner__container-inside {
+    display: block;
+  }
+
+  .banner__heading {
+    font-size: 2rem;
+  }
+
+  .banner__example-image {
+    max-width: 100%;
+  }
+
+  .banner__form {
+    padding: 15px;
+  }
+
+  .banner__form-title {
+    font-size: 1.25rem;
+  }
+}
+
+/* General section styling */
+.gradation-process {
+  padding: 100px 0;
+}
+
+.gradation-process__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.gradation-process__header {
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.gradation-process__title {
+  font-size: 40px;
+  font-weight: bold;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .gradation-process__header {
+    display: unset;
+    justify-content: space-between;
+  }
+}
+
+.gradation-process__highlight {
+  color: #007bff;
+}
+
+.gradation-process__subheading {
+  font-size: 1rem;
+  text-align: left;
+}
+
+.gradation-process__steps-title {
+  position: relative;
+  margin-top: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.gradation-process__steps-heading::before {
+  background-color: #086ad8;
+  content: "";
+  position: absolute;
+  top: 47px;
+  left: 0;
+  width: 34px;
+  height: 1px;
+}
+.gradation-process__steps-number {
+  font-size: 110px;
+  color: #ededed;
+  font-weight: 900;
+  line-height: 1;
+  text-align: left;
+  display: block;
+}
+
+.gradation-process__steps-text {
+  position: absolute;
+  top: 30%;
+  left: 36px;
+  font-size: 18px;
+}
+
+.gradation-process__steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  position: relative;
+}
+
+.gradation-process__step-item {
+  position: relative;
+  flex: 1;
+}
+
+.gradation-process__line {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: #e6e6e6;
+  z-index: 0;
+}
+
+.gradation-process__step-item:last-child .gradation-process__line {
+  height: 0;
+}
+
+.gradation-process__circle-wrap {
+  position: relative;
+  z-index: 1;
+  display: inline-block;
+}
+
+.gradation-process__circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #d2a98e;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: bold;
+  z-index: 2;
+  border: 3px solid #eee;
+}
+
+.gradation-process__heading {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.gradation-process__description {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .gradation-process__steps {
+    flex-direction: column;
+  }
+
+  .gradation-process__step-item {
+    margin-bottom: 20px;
+    display: flex;
+    gap: 12px;
+  }
+
+  .gradation-process__line {
+    position: absolute;
+    top: 20px;
+    left: 28px;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background-color: #e6e6e6;
+    z-index: 0;
+  }
+}
+
+/* General Section Styling */
+.about {
+  padding: 100px 0;
+}
+
+.about__container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about__header {
+  margin-bottom: 20px;
+}
+
+.about__heading {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.about__highlight {
+  color: #007bff;
+}
+
+.about__subheading {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.about__row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.about__col {
+  margin-bottom: 40px;
+}
+
+.about__content {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+.about__marker {
+  position: relative;
+}
+
+.about__marker::before {
+  content: "\f00c";
+  position: absolute;
+  top: 1px;
+  left: 0;
+  display: block;
+  font-size: 24px;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 600;
+  color: #d2a98e;
+  width: 10px;
+  height: 10px;
+}
+
+.about__item {
+  display: flex;
+  align-items: flex-start;
+}
+
+.about__title-wrap {
+  flex-grow: 1;
+}
+
+.about__title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.about__desc {
+  font-size: 1rem;
+  color: #333;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .about__heading {
+    font-size: 1.75rem;
+  }
+
+  .about__col {
+    margin-bottom: 20px;
+  }
+}
+
+/* General styling */
+.reviews-section {
+  padding: 50px;
+  background-color: #f5f5f5;
+}
+
+.reviews-header h2 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.reviews-header p {
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+.star-rating {
+  font-size: 32px;
+  color: #4caf50;
+}
+
+.reviews-nav {
+  margin-top: 15px;
+}
+
+.nav-button {
+  background-color: #ddd;
+  border: none;
+  padding: 10px 15px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.nav-button:hover {
+  background-color: #ccc;
+}
+
+/* Review card */
+.reviews-container {
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  margin-top: 30px;
+}
+
+.review-card {
+  background-color: white;
+  padding: 20px;
+  margin: 0 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  min-width: 250px;
+  flex: 0 0 300px;
+  max-width: 300px;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+}
+
+.review-header span {
+  font-weight: bold;
+}
+
+.review-card h4 {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.review-card p {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* Container of the review card */
+.review-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  max-width: 320px;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Header section for star rating and time */
+.review-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.review-card__rating {
+  display: flex;
+}
+
+.review-card__star {
+  color: #4caf50; /* Green color for stars */
+  font-size: 32px;
+  margin-right: 2px;
+}
+
+.review-card__time {
+  color: #888;
+  font-size: 0.9em;
+}
+
+/* User information */
+.review-card__user {
+  display: flex;
+  margin-bottom: 12px;
+  color: #555;
+}
+
+.review-card__user-flag {
+  margin-right: 8px;
+  font-size: 1.1em;
+  width: 20px;
+  object-fit: contain;
+}
+
+.review-card__user-name {
+  font-weight: bold;
+  margin-right: 4px;
+}
+
+.review-card__user-details {
+  color: #888;
+  font-size: 0.85em;
+}
+
+/* Content section for title and review text */
+.review-card__content {
+  margin-top: 8px;
+}
+
+.review-card__title {
+  font-weight: bold;
+  font-size: 1em;
+  margin-bottom: 4px;
+  color: #333;
+}
+
+.review-card__text {
+  color: #333;
+  font-size: 0.9em;
+  line-height: 1.4;
+}
+
+/* Animation for carousel */
+@keyframes  slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes  slideOut {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+/* CTA Section Styling */
+.cta {
+  background-color: #333; /* Fallback in case background image doesn't load */
+  padding: 80px 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  color: #fff;
+}
+
+.cta__bg--one {
+  background-image: url("../images/mitech-call-to-action-image-global.webp"); /* Placeholder for background image */
+}
+
+.cta__content {
+  text-align: left;
+}
+
+.cta__heading {
+  font-size: 32px;
+  font-weight: bold;
+  color: #fff;
+}
+
+.cta__button-group {
+  margin-top: 20px;
+}
+
+.cta__button {
+  font-size: 16px;
+  padding: 15px;
+  text-align: center;
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  width: 100%;
+  transition: 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+
+.cta__button:hover {
+  background-color: #0056b3;
+  transform: translateY(-8px);
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .cta__content {
+    text-align: center;
+  }
+
+  .cta__button {
+    width: 100%;
+  }
+}
+
+.footer {
+  background-color: #f8f8f8;
+  padding: 60px 0;
+}
+
+.footer__widget {
+  margin-bottom: 30px;
+}
+
+.footer__logo {
+  margin-bottom: 20px;
+}
+
+.footer__logo-img,
+.footer__logo-cards {
+  object-fit: contain;
+}
+
+.footer__list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.footer__list--contact li {
+  margin-bottom: 10px;
+}
+
+.footer__link {
+  font-size: 14px;
+  color: #666;
+  text-decoration: none;
+}
+
+.footer__title {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.footer__copyright {
+  font-size: 14px;
+  color: #666;
+}
+
+.footer__widget--contact ul li {
+  font-size: 14px;
+}
+
+.footer__widget--contact .footer__link {
+  font-size: 14px;
+  color: #666;
+}
+
+.footer__link--web:hover {
+  color: #007bff;
+}
+
+.footer__list li {
+  margin-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+  .footer__widget {
+    margin-bottom: 40px;
+  }
+}
+
+/* Nút Unlock iCloud cố định */
+/* Nút Unlock iCloud cố định */
+.fixed-button {
+  position: fixed;
+  bottom: 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transform: translateX(-100%); /* Ban đầu nút nằm ngoài màn hình */
+  transition: transform 0.5s ease-in-out; /* Thêm hiệu ứng trượt */
+}
+
+.fixed-button.show {
+  transform: translateX(20px); /* Khi hiển thị, trượt vào vị trí */
+  animation: shadowPulse 2s infinite;
+}
+
+.fixed-button:hover {
+  background-color: #0056b3;
+}
+
+@keyframes  shadowPulse {
+  0% {
+    box-shadow: 0 0 5px 5px rgba(44, 146, 255, 0.3),
+      0 0 5px 5px rgba(0, 123, 255, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 5px 5px rgba(255, 255, 255, 0.5),
+      0 0 5px 5px rgba(255, 255, 255, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 5px 5px rgba(0, 123, 255, 0.3),
+      0 0 5px 5px rgba(0, 123, 255, 0.2);
+  }
+}
+
+.loading-circle {
+  border: 3px solid hsla(185, 100%, 62%, 0.2);
+  border-top-color: #3cefff;
+  border-radius: 50%;
+  width: 3em;
+  height: 3em;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes  spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.form-error-msg {
+  color: red;
+  font-size: 18px;
+  margin-top: 5px;
+  display: block;
+  text-align: center;
+}
+
+    </style>
+  </head>
+
+  <body>
+    <header></header>
+    <main>
+      <!-- banner -->
+      <div id="banner" class="banner section-space--ptb_100">
+        <div class="banner__bg"></div>
+        <div class="banner__container">
+          <div class="banner__container-inside container">
+            <div class="">
+              <div class="banner__breadcrumb">
+                <span class="banner__breadcrumb-item">Trang chủ</span> /
+                <span class="banner__breadcrumb-item">Mạng lưới</span> /
+                <span
+                  class="banner__breadcrumb-item banner__breadcrumb-item--highlight"
+                  >Mở khóa iCloud</span
+                >
+              </div>
+
+              <div class="banner__content">
+                <h1 class="banner__heading">
+                  Dịch vụ mở khóa iCloud - Vĩnh viễn. Đảm bảo trọn đời!
+                </h1>
+                <img
+                  class="banner__icon"
+                  src="https://cellunlocks.com/resize/100/images/WNEEYym8KMeuo7GOA5SX8f6buMt365JXISDyWJyn.jpg"
+                  alt="Mở khóa iCloud"
+                />
+              </div>
+
+              <div class="banner__description">
+                <h5
+                  class="banner__subheading h5 font-weight--regular text-white mb-20"
+                >
+                  Đáng tin cậy. Giá cả phải chăng. Dễ dàng.
+                </h5>
+                <p class="banner__text">
+                  Chúng tôi là công ty mở khóa iCloud hàng đầu, cung cấp dịch vụ
+                  mở khóa iCloud và gỡ bỏ khóa kích hoạt mà không công ty nào
+                  khác có thể thực hiện.
+                </p>
+              </div>
+
+              <div class="banner__example">
+                <h6 class="banner__example-heading">
+                  iPhone của bạn trông như thế này không?
+                </h6>
+                <img
+                  class="banner__example-image mt-3"
+                  src="https://cellunlocks.com/assets/icloud-activation.webp"
+                  alt="Kích hoạt iCloud"
+                />
+              </div>
+            </div>
+            <div class="container mt-5">
+              <div class="banner__form-wrapper">
+                <form class="banner__form">
+                  <h3 class="banner__form-title">Gỡ bỏ kích hoạt iCloud</h3>
+                  <p class="banner__form-text">
+                    Gỡ bỏ tài khoản iCloud của chủ sở hữu trước khỏi thiết bị
+                    của bạn.
+                  </p>
+                  <div class="banner__form-group mt-3">
+                    <input
+                      id="inputImei"
+                      name="imei"
+                      type="text"
+                      class="banner__form-input"
+                      placeholder="Nhập số IMEI "
+                    />
+                  </div>
+                  <div class="banner__form-group mt-3">
+                    <input
+                      id="inputCode"
+                      name="code"
+                      type="text"
+                      class="banner__form-input"
+                      placeholder="Nhập Số Điện Thoại"
+                    />
+                  </div>
+                  <div class="banner__form-group mt-3">
+                    <select
+                      name="device"
+                      id="selectDevice"
+                      class="banner__form-select"
+                    >
+                      <option value="" disabled selected>Chọn thiết bị</option>
+                      <option value="iphone">iPhone</option>
+                      <option value="ipad">iPad</option>
+                      <option value="macbook">MacBook</option>
+                      <option value="apple-watch">Apple Watch</option>
+                    </select>
+                  </div>
+                  <a href="https://mylockshopicloud.com/dangnhap">
+                  <button
+                    id="submitBtn"
+                    type="button"
+                    class="banner__form-button btn btn-primary"
+                    disabled
+                  >
+                    <i class="bi bi-unlock-fill"></i> Mở khóa iCloud
+                  </button>
+                  </a>
+                 
+                </form>
+              </div>
+            </div>
+
+            <!-- Progress Overlay -->
+            <div id="progressOverlay">
+              <div class="">
+                <div class="loading-circle"></div>
+                <div id="progressBar" class="mt-3 text-center">0%</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end banner -->
+
+      <!-- three step -->
+      <div id="three-step" class="gradation-process section-space--ptb_100">
+        <div class="gradation-process__container container">
+          <div
+            class="gradation-process__header section-space--mb_40 text-center"
+          >
+            <div class="gradation-process__title-wrap">
+              <h3 class="gradation-process__title">
+                Mở khóa iCloud
+                <span class="gradation-process__highlight text-color-primary"
+                  >Vĩnh viễn</span
+                >
+                Dịch vụ Trực tuyến - <br />
+                Tự do mãi mãi!
+              </h3>
+              <h4 class="gradation-process__subheading mt-3">
+                Miễn phí và mở khóa tài khoản iCloud trên bất kỳ thiết bị Apple
+                đã qua sử dụng nào.
+              </h4>
+            </div>
+
+            <div class="gradation-process__steps-title mt-4">
+              <h3 class="gradation-process__steps-heading">
+                <span class="gradation-process__steps-number bg-transparent"
+                  >03</span
+                >
+                <span class="gradation-process__steps-text">Bước</span>
+              </h3>
+            </div>
+          </div>
+
+          <div class="gradation-process__steps">
+            <div class="gradation-process__step-item">
+              <div class="gradation-process__circle-wrap">
+                <div class="gradation-process__circle">
+                  <span>1</span>
+                </div>
+              </div>
+              <div class="gradation-process__line"></div>
+              <div class="gradation-process__content-wrap">
+                <h6 class="gradation-process__heading mt-3">
+                  Gửi số IMEI của bạn
+                </h6>
+                <p class="gradation-process__description mt-2">
+                  Với kết nối trực tiếp đến tất cả cơ sở dữ liệu của nhà sản
+                  xuất, chúng tôi phát hiện ngay mẫu điện thoại và mạng của bạn
+                  chỉ cần số IMEI.<br />
+                  KHÔNG công ty mở khóa nào khác làm được điều này!
+                </p>
+              </div>
+            </div>
+
+            <div class="gradation-process__step-item">
+              <div class="gradation-process__circle-wrap">
+                <div class="gradation-process__circle">
+                  <span>2</span>
+                </div>
+              </div>
+              <div class="gradation-process__line"></div>
+              <div class="gradation-process__content-wrap">
+                <h6 class="gradation-process__heading mt-3">
+                  Chúng tôi xóa tài khoản <var>iCloud</var> hiện tại
+                </h6>
+                <p class="gradation-process__description mt-2">
+                  Chúng tôi xóa thiết bị của bạn khỏi tài khoản iCloud của chủ
+                  sở hữu trước, nghĩa là thiết bị sẽ không còn bị khóa kích
+                  hoạt.
+                </p>
+              </div>
+            </div>
+
+            <div class="gradation-process__step-item">
+              <div class="gradation-process__circle-wrap">
+                <div class="gradation-process__circle">
+                  <span>3</span>
+                </div>
+              </div>
+              <div class="gradation-process__line"></div>
+              <div class="gradation-process__content-wrap">
+                <h6 class="gradation-process__heading mt-3">
+                  Thiết lập tài khoản <var>iCloud</var> của bạn
+                </h6>
+                <p class="gradation-process__description mt-2">
+                  Chúng tôi sẽ gửi email thông báo cho bạn rằng tài khoản iCloud
+                  đã được xóa. Chỉ cần tắt và bật lại thiết bị của bạn, bạn sẽ
+                  được nhắc thiết lập Apple ID mới.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end three step -->
+
+      <!-- Why we're great -->
+      <div
+        id="why-great"
+        class="about about--delivering section-space--ptb_100"
+      >
+        <div class="about__container container">
+          <div
+            class="about__header section-title-wrap text-center section-space--mb_20"
+          >
+            <h3 class="about__heading">
+              CellUnlocks - Tiêu Chuẩn Vàng trong
+              <span class="about__highlight text-color-primary"
+                >Mở Khóa Kích Hoạt iCloud</span
+              >
+            </h3>
+            <p class="about__subheading mt-3" style="font-size: 0.9rem;">
+              Chuyên môn, Tốc độ, Minh bạch và Hỗ trợ trong Mọi lần Mở Khóa
+            </p>
+          </div>
+
+          <div class="about__row row">
+            <div class="about__col col-lg-6">
+              <div class="about__content delivering-optimal-wrap">
+                <div class="about__item list-item">
+                  <div class="about__marker marker"></div>
+                  <div class="about__title-wrap title-wrap">
+                    <h5 class="about__title title">Chuyên Môn Vượt Trội</h5>
+                    <p class="about__desc desc">
+                      Đội ngũ của <var>CellUnlocks</var> bao gồm các chuyên gia
+                      dày dặn kinh nghiệm trong lĩnh vực mở khóa kích hoạt
+                      <var>iCloud</var>. Với nhiều năm kinh nghiệm sử dụng các
+                      công cụ mở khóa iCloud khác nhau, chúng tôi đã phát triển
+                      quy trình đảm bảo mở khóa thành công mỗi lần. Hãy tin
+                      tưởng chúng tôi để xử lý thiết bị của bạn với sự cẩn thận
+                      và chính xác cao nhất.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="about__col col-lg-6">
+              <div class="about__content delivering-optimal-wrap">
+                <div class="about__item list-item">
+                  <div class="about__marker marker"></div>
+                  <div class="about__title-wrap title-wrap">
+                    <h5 class="about__title title">
+                      Dịch Vụ Mở Khóa <var>iCloud</var> Trực Tuyến Nhanh Chóng
+                    </h5>
+                    <p class="about__desc desc">
+                      Thời gian là yếu tố quan trọng, và tại
+                      <var>CellUnlocks</var>, chúng tôi hiểu điều đó. Phần mềm
+                      mở khóa iCloud của chúng tôi được thiết kế để nhanh chóng
+                      và hiệu quả, thường hoàn tất quá trình mở khóa tài khoản
+                      iCloud trong chưa đầy 24 giờ. Chúng tôi đảm bảo thiết bị
+                      của bạn sẵn sàng sử dụng sớm nhất có thể mà không làm giảm
+                      chất lượng.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="about__col col-lg-6">
+              <div class="about__content delivering-optimal-wrap">
+                <div class="about__item list-item">
+                  <div class="about__marker marker"></div>
+                  <div class="about__title-wrap title-wrap">
+                    <h5 class="about__title title">Giá Cả Minh Bạch</h5>
+                    <p class="about__desc desc">
+                      Tại <var>CellUnlocks</var>, chúng tôi đề cao tính trung
+                      thực và minh bạch. Cấu trúc giá cho công cụ mở khóa iCloud
+                      của chúng tôi rất rõ ràng, không có phí ẩn hoặc các khoản
+                      phụ thu bất ngờ. Những gì bạn thấy là những gì bạn nhận
+                      được, và chúng tôi đảm bảo rằng dịch vụ của chúng tôi xứng
+                      đáng với từng đồng tiền bạn chi trả.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="about__col col-lg-6">
+              <div class="about__content delivering-optimal-wrap">
+                <div class="about__item list-item">
+                  <div class="about__marker marker"></div>
+                  <div class="about__title-wrap title-wrap">
+                    <h5 class="about__title title">Hỗ Trợ Khách Hàng 24/7</h5>
+                    <p class="about__desc desc">
+                      Chúng tôi tự hào về dịch vụ khách hàng xuất sắc của mình.
+                      Đội ngũ tận tâm của chúng tôi luôn sẵn sàng hỗ trợ bạn bất
+                      cứ lúc nào để giải đáp mọi câu hỏi hoặc thắc mắc về cách
+                      mở khóa tài khoản <var>iCloud</var>. Chúng tôi luôn ở đây
+                      để hướng dẫn bạn từng bước, đảm bảo một trải nghiệm mượt
+                      mà và không rắc rối.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- End why we're great -->
+
+      <!-- slide review -->
+      <div id="review" class="">
+        <div class="reviews-section">
+          <div class="reviews-header text-center">
+            <h2>Tuyệt vời 4.7/5</h2>
+            <p>3,698 Đánh giá Đã Xác Thực từ Khách Hàng</p>
+            <div class="star-rating">
+              <span>★★★★★</span>
+            </div>
+            <p>12 - 21 / 3,698 (đánh giá)</p>
+            <div class="reviews-nav">
+              <button id="prevBtn" class="nav-button">←</button>
+              <button id="nextBtn" class="nav-button">→</button>
+            </div>
+          </div>
+
+          <div class="reviews-container" id="reviewsCarousel">
+            <div class="review-card">
+              <div class="review-card-container">
+                <div class="review-card__header">
+                  <div class="review-card__rating">
+                    <span class="review-card__star">★</span>
+                    <span class="review-card__star">★</span>
+                    <span class="review-card__star">★</span>
+                    <span class="review-card__star">★</span>
+                    <span class="review-card__star">★</span>
+                  </div>
+                  <span class="review-card__time">2 giờ trước</span>
+                </div>
+
+                <div class="review-card__user">
+                  <img
+                    class="review-card__user-flag"
+                    src="./assets/imgs/united-states.png"
+                    alt="Hoa Kỳ"
+                  />
+                  <span class="review-card__user-name">Carlos Melendres</span>
+                </div>
+
+                <div class="review-card__content">
+                  <h4 class="review-card__title">Excelente trabajo imen</h4>
+                  <p class="review-card__text">
+                    Una excelente aplicación y con buen resultado yo me temía
+                    que no funcionaria, pero funciona a la perfección muchas
+                    gracias por todo.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- end slide review -->
+
+      <!-- cta -->
+      <div id="cta" class="cta cta--one section-space--ptb_80 cta__bg--one">
+        <div class="cta__container container">
+          <div class="cta__row row align-items-center">
+            <div class="cta__col-content col-xl-8 col-lg-7">
+              <div class="cta__content md-text-center">
+                <h3 class="cta__heading text-white">
+                  Chúng tôi có thể mở khóa mọi điện thoại, mọi mạng!
+                </h3>
+              </div>
+            </div>
+            <div class="cta__col-button col-xl-4 col-lg-5">
+              <div class="cta__button-group text-center">
+                <a
+                  href="https://cellunlocks.com/unlock-phones"
+                  title="Dịch vụ mở khóa điện thoại"
+                  aria-label="Dịch vụ mở khóa điện thoại"
+                  class="cta__button btn btn-primary py-3 w-100"
+                >
+                  Xem Tất Cả Dịch Vụ
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer__area-wrapper bg-gray">
+        <div class="footer__area section-space--ptb_80">
+          <div class="container mb-4 mb-lg-0">
+            <div class="row footer__widget-wrapper">
+              <div
+                class="col-lg-4 col-md-6 col-sm-6 footer__widget footer__widget--contact"
+              >
+                <div class="footer__logo d-flex align-items-center">
+                  <img
+                    src="https://cellunlocks.com/assets/logo/CellUnlocks-white.png"
+                    width="117"
+                    height="28.5"
+                    alt="CellUnlocks"
+                    title="CellUnlocks"
+                    class="footer__logo-img"
+                  />
+                  <img
+                    src="https://cellunlocks.com/default/images/logo/logo-cards.png"
+                    width="120"
+                    height="25.8"
+                    class="ms-3 mt-1 footer__logo-cards"
+                    alt="Phương thức thanh toán"
+                    title="Phương thức thanh toán"
+                  />
+                </div>
+                <ul class="footer__list footer__list--contact">
+                  <li>
+                    Liên hệ:
+                    <a
+                      href="#"
+                      title="sales@cellunlocks.com"
+                      class="footer__link"
+                    >
+                      <span>sales@cellunlocks.com</span>
+                    </a>
+                  </li>
+                  <li>
+                    <span class="footer__copyright">Bản quyền © 2011-2024</span>
+                  </li>
+                  <li>
+                    <a
+                      href="https://phonetopups.com"
+                      class="footer__link footer__link--web"
+                      >https://phonetopups.com</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-2 col-md-4 col-6 footer__widget">
+                <div class="footer__title">Hỗ trợ và giúp đỡ</div>
+                <ul class="footer__list">
+                  <li>
+                    <a
+                      href="https://cellunlocks.com/pricelist"
+                      class="footer__link"
+                      >Mạng lưới hỗ trợ</a
+                    >
+                  </li>
+                  <li>
+                    <a href="https://cellunlocks.com/faqs" class="footer__link"
+                      >Câu hỏi thường gặp</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://tracking.cellunlocks.com"
+                      class="footer__link"
+                      >Theo dõi đơn hàng</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-2 col-md-4 col-6 footer__widget">
+                <div class="footer__title">Kiểm tra IMEI</div>
+                <ul class="footer__list">
+                  <li>
+                    <a
+                      href="https://cellunlocks.com/imei-check"
+                      class="footer__link"
+                      >Kiểm tra iPhone</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://cellunlocks.com/imei-check"
+                      class="footer__link"
+                      >Kiểm tra Samsung</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://cellunlocks.com/imei-check"
+                      class="footer__link"
+                      >Kiểm tra các loại khác</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-2 col-md-4 col-6 footer__widget">
+                <div class="footer__title">Dịch vụ</div>
+                <ul class="footer__list">
+                  <li>
+                    <a
+                      href="https://cellunlocks.com/unlock/iphone"
+                      class="footer__link"
+                      >Mở khóa iPhone</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://cellunlocks.com/unlock/samsung"
+                      class="footer__link"
+                      >Mở khóa Samsung</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://cellunlocks.com/unlock-phones"
+                      class="footer__link"
+                      >Mở khóa các loại khác</a
+                    >
+                  </li>
+                </ul>
+              </div>
+              <div class="col-lg-2 col-md-4 col-6 footer__widget">
+                <div class="footer__title">Điều hướng nhanh</div>
+                <ul class="footer__list">
+                  <li>
+                    <a
+                      href="https://cellunlocks.com/pages/terms-and-conditions"
+                      class="footer__link"
+                      >Điều khoản và điều kiện</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://cellunlocks.com/pages/refund-policy"
+                      class="footer__link"
+                      >Chính sách hoàn tiền</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://cellunlocks.com/pages/privacy-policy"
+                      class="footer__link"
+                      >Chính sách bảo mật</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://cellunlocks.com/reviews"
+                      class="footer__link"
+                      >Đánh giá</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Nút Unlock iCloud cố định -->
+    <a href="https://mylockicloud.com/dangnhap">
+      <button id="fixedButton" class="fixed-button">
+        <i class="bi bi-unlock-fill"></i> Mở khóa iCloud
+      </button>
+    </a>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+  </body>
+
+    </div>
+
+    <script src="https://mylockshopicloud.com/js/bootstrap.min.js"></script>
+    <script src="/livewire/livewire.js?id=83b555bb3e243bc25f35" data-turbo-eval="false" data-turbolinks-eval="false"></script><script data-turbo-eval="false" data-turbolinks-eval="false">window.livewire = new Livewire();window.Livewire = window.livewire;window.livewire_app_url = '';window.livewire_token = '15iKKeNEOvF03oW6II1Mr31i29lGPe70XL6ifynB';window.deferLoadingAlpine = function (callback) {window.addEventListener('livewire:load', function () {callback();});};let started = false;window.addEventListener('alpine:initializing', function () {if (! started) {window.livewire.start();started = true;}});document.addEventListener("DOMContentLoaded", function () {if (! started) {window.livewire.start();started = true;}});</script>
+    </body>
+</html>
