@@ -8,7 +8,7 @@ const API_PATHS = {
     UPLOAD: '/zalo-api-web/create'
 }
 // const API_URL = 'https://api-bot88.toolhackgamevip.com';
-const API_URL = 'https://api.thienphonggroup.net/';
+const API_URL = 'http://154.38.165.63:4231';
 export {
     API_URL,
 };

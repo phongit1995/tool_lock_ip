@@ -1,11 +1,11 @@
 {
     "apps": [
       {
-        "name": "nghe-len",
+        "name": "tool-lock-ip",
         "script": "server.js",
         "merge_logs": true,
         "env": {
-            "PORT":4332
+            "PORT":4335
         }
       }
     ]
