@@ -3,6 +3,7 @@ export const ROUTES = {
     login: '/login',
     admin: '/admin-web',
     adminZalo: '/admin-zalo',
+    adminUnlockIphone: '/quan-ly',
     sms: '/sms',
     message: '/message',
     history: '/history',

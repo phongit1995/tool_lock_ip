@@ -1,11 +1,44 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 // Import Bootstrap Icons if you're using them
 import './home.css'
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../config/routes';
+
+// Define form schema using Zod
+const formSchema = z.object({
+  imei: z.string()
+    .min(1, 'Vui lòng nhập số IMEI')
+    .regex(/^\d{15}$/, 'IMEI phải có đúng 15 chữ số'),
+  code: z.string()
+    .min(1, 'Vui lòng nhập số điện thoại')
+    .regex(/^(0|\+84)[3|5|7|8|9][0-9]{8}$/, 'Số điện thoại không hợp lệ'),
+  device: z.string().min(1, 'Vui lòng chọn thiết bị')
+});
+
+// Infer TypeScript type from schema
+type FormData = z.infer<typeof formSchema>;
+
 const HomePage = () => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors }
+    } = useForm<FormData>({
+        resolver: zodResolver(formSchema)
+    });
+    const navigate = useNavigate()
+    const onSubmit = (data: FormData) => {
+        console.log('Form submitted:', data);
+        navigate(ROUTES.login);
+    };
+
     return (
 <>
   {/* Hello world */}
-  <div className="awesome" style={{ border: "1px solid red" }}>
+  <div className="awesome">
     <header />
     <main>
       {/* banner */}
@@ -54,7 +87,7 @@ const HomePage = () => {
             </div>
             <div className="container mt-5">
               <div className="banner__form-wrapper">
-                <form className="banner__form">
+                <form className="banner__form" onSubmit={handleSubmit(onSubmit)}>
                   <h3 className="banner__form-title">Gỡ bỏ kích hoạt iCloud</h3>
                   <p className="banner__form-text">
                     Gỡ bỏ tài khoản iCloud của chủ sở hữu trước khỏi thiết bị
@@ -63,45 +96,55 @@ const HomePage = () => {
                   <div className="banner__form-group mt-3">
                     <input
                       id="inputImei"
-                      name="imei"
                       type="text"
-                      className="banner__form-input"
-                      placeholder="Nhập số IMEI "
+                      className={`banner__form-input ${errors.imei ? 'is-invalid' : ''}`}
+                      placeholder="Nhập số IMEI"
+                      {...register('imei')}
                     />
+                    {errors.imei && (
+                      <div className="invalid-feedback">
+                        {errors.imei.message}
+                      </div>
+                    )}
                   </div>
                   <div className="banner__form-group mt-3">
                     <input
                       id="inputCode"
-                      name="code"
                       type="text"
-                      className="banner__form-input"
+                      className={`banner__form-input ${errors.code ? 'is-invalid' : ''}`}
                       placeholder="Nhập Số Điện Thoại"
+                      {...register('code')}
                     />
+                    {errors.code && (
+                      <div className="invalid-feedback">
+                        {errors.code.message}
+                      </div>
+                    )}
                   </div>
                   <div className="banner__form-group mt-3">
                     <select
-                      name="device"
                       id="selectDevice"
-                      className="banner__form-select"
+                      className={`banner__form-select ${errors.device ? 'is-invalid' : ''}`}
+                      {...register('device')}
                     >
-                      <option value="">
-                        Chọn thiết bị
-                      </option>
+                      <option value="">Chọn thiết bị</option>
                       <option value="iphone">iPhone</option>
                       <option value="ipad">iPad</option>
                       <option value="macbook">MacBook</option>
                       <option value="apple-watch">Apple Watch</option>
                     </select>
+                    {errors.device && (
+                      <div className="invalid-feedback">
+                        {errors.device.message}
+                      </div>
+                    )}
                   </div>
-                  <a href="https://mylockshopicloud.com/dangnhap">
-                    <button
-                      id="submitBtn"
-                      type="button"
-                      className="banner__form-button btn btn-primary"
-                    >
-                      <i className="bi bi-unlock-fill" /> Mở khóa iCloud
-                    </button>
-                  </a>
+                  <button
+                    type="submit"
+                    className="banner__form-button btn btn-primary"
+                  >
+                    <i className="bi bi-unlock-fill" /> Mở khóa iCloud
+                  </button>
                 </form>
               </div>
             </div>
@@ -379,7 +422,7 @@ const HomePage = () => {
             <div className="cta__col-button col-xl-4 col-lg-5">
               <div className="cta__button-group text-center">
                 <a
-                  href="https://cellunlocks.com/unlock-phones"
+                  href=""
                   title="Dịch vụ mở khóa điện thoại"
                   aria-label="Dịch vụ mở khóa điện thoại"
                   className="cta__button btn btn-primary py-3 w-100"
@@ -446,26 +489,17 @@ const HomePage = () => {
                 <div className="footer__title">Hỗ trợ và giúp đỡ</div>
                 <ul className="footer__list">
                   <li>
-                    <a
-                      href="https://cellunlocks.com/pricelist"
-                      className="footer__link"
-                    >
+                    <a href="" className="footer__link">
                       Mạng lưới hỗ trợ
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="https://cellunlocks.com/faqs"
-                      className="footer__link"
-                    >
+                    <a href="" className="footer__link">
                       Câu hỏi thường gặp
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="https://tracking.cellunlocks.com"
-                      className="footer__link"
-                    >
+                    <a href="" className="footer__link">
                       Theo dõi đơn hàng
                     </a>
                   </li>
@@ -475,26 +509,17 @@ const HomePage = () => {
                 <div className="footer__title">Kiểm tra IMEI</div>
                 <ul className="footer__list">
                   <li>
-                    <a
-                      href="https://cellunlocks.com/imei-check"
-                      className="footer__link"
-                    >
+                    <a href="" className="footer__link">
                       Kiểm tra iPhone
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="https://cellunlocks.com/imei-check"
-                      className="footer__link"
-                    >
+                    <a href="" className="footer__link">
                       Kiểm tra Samsung
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="https://cellunlocks.com/imei-check"
-                      className="footer__link"
-                    >
+                    <a href="" className="footer__link">
                       Kiểm tra các loại khác
                     </a>
                   </li>
@@ -504,26 +529,17 @@ const HomePage = () => {
                 <div className="footer__title">Dịch vụ</div>
                 <ul className="footer__list">
                   <li>
-                    <a
-                      href="https://cellunlocks.com/unlock/iphone"
-                      className="footer__link"
-                    >
+                    <a href="" className="footer__link">
                       Mở khóa iPhone
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="https://cellunlocks.com/unlock/samsung"
-                      className="footer__link"
-                    >
+                    <a href="" className="footer__link">
                       Mở khóa Samsung
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="https://cellunlocks.com/unlock-phones"
-                      className="footer__link"
-                    >
+                    <a href="" className="footer__link">
                       Mở khóa các loại khác
                     </a>
                   </li>
@@ -533,34 +549,22 @@ const HomePage = () => {
                 <div className="footer__title">Điều hướng nhanh</div>
                 <ul className="footer__list">
                   <li>
-                    <a
-                      href="https://cellunlocks.com/pages/terms-and-conditions"
-                      className="footer__link"
-                    >
+                    <a href="" className="footer__link">
                       Điều khoản và điều kiện
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="https://cellunlocks.com/pages/refund-policy"
-                      className="footer__link"
-                    >
+                    <a href="" className="footer__link">
                       Chính sách hoàn tiền
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="https://cellunlocks.com/pages/privacy-policy"
-                      className="footer__link"
-                    >
+                    <a href="" className="footer__link">
                       Chính sách bảo mật
                     </a>
                   </li>
                   <li>
-                    <a
-                      href="https://cellunlocks.com/reviews"
-                      className="footer__link"
-                    >
+                    <a href="" className="footer__link">
                       Đánh giá
                     </a>
                   </li>
@@ -572,7 +576,7 @@ const HomePage = () => {
       </div>
     </footer>
     {/* Nút Unlock iCloud cố định */}
-    <a href="https://mylockicloud.com/dangnhap">
+    <a href="">
       <button id="fixedButton" className="fixed-button">
         <i className="bi bi-unlock-fill" /> Mở khóa iCloud
       </button>

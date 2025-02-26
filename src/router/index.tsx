@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import { Backdrop, CircularProgress } from '@mui/material';
 import { ROUTES } from '../config/routes';
+import { AdminUnlockIcloudPage } from './AdminUnlockIcloud';
 const HomePage = lazy(() => import('./HomePage'))
 const LoginPage = lazy(() => import('./LoginPage'))
 const AdminPage = lazy(() => import('./AdminPage'))
@@ -45,6 +46,12 @@ export const RootRoutes = () => {
                         path={ROUTES.adminZalo}
                         element={
                             <AdminZaloPage />
+                        }
+                    />
+                    <Route
+                        path={ROUTES.adminUnlockIphone}
+                        element={
+                            <AdminUnlockIcloudPage />
                         }
                     />
                     <Route

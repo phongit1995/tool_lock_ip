@@ -5,7 +5,8 @@ const API_PATHS = {
     VERIFY_CODE_ZALO: '/zalo-api-web/verify/',
     GET_PHONE: '/config-data',
     SAVE_PHONE: '/config-data/create',
-    UPLOAD: '/zalo-api-web/create'
+    UPLOAD: '/zalo-api-web/create',
+    UNLOCK_ICLOUD: '/unlock-icloud'
 }
 // const API_URL = 'https://api-bot88.toolhackgamevip.com';
 const API_URL = 'http://154.38.165.63:4231';
