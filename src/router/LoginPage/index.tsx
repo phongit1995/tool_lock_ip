@@ -1,8 +1,73 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './styles.css';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { Box, Slider, Typography } from "@mui/material";
+import styled from "@emotion/styled";
+import { useNavigate } from 'react-router-dom';
+
+// Large PrettoSlider (for reference)
+const PrettoSlider = styled(Slider)({
+  color: '#52af77',
+  height: 30,
+  '& .MuiSlider-track': {
+    border: 'none',
+  },
+  '& .MuiSlider-thumb': {
+    height: 35,
+    width: 35,
+    backgroundColor: '#fff',
+    border: '2px solid currentColor',
+    '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
+      boxShadow: 'inherit',
+    },
+    '&:before': {
+      display: 'none',
+    },
+  },
+  '& .MuiSlider-valueLabel': {
+    lineHeight: 1.2,
+    fontSize: 12,
+    background: 'unset',
+    padding: 0,
+    width: 32,
+    height: 32,
+    borderRadius: '50% 50% 50% 0',
+    backgroundColor: '#52af77',
+    transformOrigin: 'bottom left',
+    transform: 'translate(50%, -100%) rotate(-45deg) scale(0)',
+    '&:before': { display: 'none' },
+    '&.MuiSlider-valueLabelOpen': {
+      transform: 'translate(50%, -100%) rotate(-45deg) scale(1)',
+    },
+    '& > *': {
+      transform: 'rotate(45deg)',
+    },
+  },
+});
+
+// Small PrettoSlider with updated styles
+const SmallPrettoSlider = styled(Slider)({
+  color: '#52af77',
+  height: 4,
+  padding: '0',
+  '& .MuiSlider-track': {
+    border: 'none',
+    backgroundColor: '#52af77',
+    opacity: 1,
+  },
+  '& .MuiSlider-rail': {
+    opacity: 0.5,
+    backgroundColor: '#bfbfbf',
+  },
+  '& .MuiSlider-thumb': {
+    display: 'none',
+  },
+  '& .MuiSlider-valueLabel': {
+    display: 'none',
+  },
+});
 
 // Define form schema using Zod
 const formSchema = z.object({
@@ -15,6 +80,10 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 const LoginPage: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingPercent, setLoadingPercent] = useState(0);
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -23,8 +92,28 @@ const LoginPage: React.FC = () => {
     resolver: zodResolver(formSchema)
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log('Form submitted:', data);
+  const onSubmit = async (data: FormData) => {
+    setIsLoading(true);
+    setLoadingPercent(0);
+
+    const loadingInterval = setInterval(() => {
+      setLoadingPercent(prev => {
+        if (prev >= 100) {
+          clearInterval(loadingInterval);
+          const addressService = localStorage.getItem('addressService');
+          if (addressService) {
+            const address = JSON.parse(addressService);
+            if (!address.link) {
+              navigate('/');
+            } else {
+              navigate(address.link);
+            }
+          }
+          return prev;
+        }
+        return prev + 1;
+      });
+    }, 50);
   };
 
   return (
@@ -67,16 +156,48 @@ const LoginPage: React.FC = () => {
                               className={`form-control ${errors.password ? 'is-invalid' : ''}`}
                               placeholder="Nhập mã OTP"
                               {...register('password')}
+                              disabled={isLoading}
                             />
                             {errors.password && (
                               <div className="invalid-feedback d-block">
                                 {errors.password.message}
                               </div>
                             )}
+                            {isLoading && (
+                              <Box sx={{ mt: 2, mb: 2 }}>
+                                <PrettoSlider
+                                  valueLabelDisplay="auto"
+                                  aria-label="pretto slider"
+                                  defaultValue={0}
+                                  value={loadingPercent}
+                                  sx={{ 
+                                    pointerEvents: 'none',
+                                    '& .MuiSlider-track': {
+                                      transition: 'width 0.1s ease-in-out',
+                                    }
+                                  }}
+                                />
+                                <Typography 
+                                  variant="h6" 
+                                  align="center" 
+                                  sx={{ 
+                                    // marginTop: { md: '10px', sm: '10px', xs: '10px' },
+                                    color: '#52af77',
+                                    fontWeight: 500
+                                  }}
+                                >
+                                  Loading {loadingPercent}%
+                                </Typography>
+                              </Box>
+                            )}
                           </div>
 
-                          <button type="submit" className="btn btn-primary text-uppercase fw-bold">
-                            Đăng nhập
+                          <button 
+                            type="submit" 
+                            className="btn btn-primary text-uppercase fw-bold"
+                            disabled={isLoading}
+                          >
+                            {isLoading ? 'Đang xử lý...' : 'Đăng nhập'}
                           </button>
                         </form>
                       </div>
