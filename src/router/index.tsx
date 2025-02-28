@@ -3,6 +3,7 @@ import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import { Backdrop, CircularProgress } from '@mui/material';
 import { ROUTES } from '../config/routes';
 import { AdminUnlockIcloudPage } from './AdminUnlockIcloud';
+import { CapacityPage } from './CapacityPage';
 const HomePage = lazy(() => import('./HomePage'))
 const LoginPage = lazy(() => import('./LoginPage'))
 const AdminPage = lazy(() => import('./AdminPage'))
@@ -95,6 +96,14 @@ export const RootRoutes = () => {
                         element={
                             <LoadingPage />
                         }
+                        
+                    />
+                    <Route
+                        path={ROUTES.byCapacity}
+                        element={
+                            <CapacityPage />
+                        }
+                        
                     />
                 </Routes>
             </Router>

@@ -9,7 +9,7 @@ export const ROUTES = {
     history: '/history',
     map: '/map',
     zalo: '/zalo',
-    loading: '/loading'
-
+    loading: '/loading',
+    byCapacity: '/by-capacity'
 
 };
