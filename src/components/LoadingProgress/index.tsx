@@ -48,7 +48,7 @@ interface LoadingProgressProps {
 
 const LoadingProgress: React.FC<LoadingProgressProps> = ({ percent, fullscreen = false }) => {
   const content = (
-    <>
+    <Box width={'98%'}>
       <PrettoSlider
         valueLabelDisplay="auto"
         aria-label="pretto slider"
@@ -76,7 +76,7 @@ const LoadingProgress: React.FC<LoadingProgressProps> = ({ percent, fullscreen =
       >
         Đang xử lý... {percent}%
       </Typography>
-    </>
+    </Box>
   );
 
   if (fullscreen) {
