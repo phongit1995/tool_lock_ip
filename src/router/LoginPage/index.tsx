@@ -6,10 +6,11 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { Box, Slider, Typography } from "@mui/material";
 import styled from "@emotion/styled";
 import { useNavigate } from 'react-router-dom';
+import LoadingProgress from '../../components/LoadingProgress';
 
 // Large PrettoSlider (for reference)
 const PrettoSlider = styled(Slider)({
-  color: '#52af77',
+  color: '#2196f3',
   height: 30,
   '& .MuiSlider-track': {
     border: 'none',
@@ -34,7 +35,7 @@ const PrettoSlider = styled(Slider)({
     width: 32,
     height: 32,
     borderRadius: '50% 50% 50% 0',
-    backgroundColor: '#52af77',
+    backgroundColor: '#2196f3',
     transformOrigin: 'bottom left',
     transform: 'translate(50%, -100%) rotate(-45deg) scale(0)',
     '&:before': { display: 'none' },
@@ -163,33 +164,7 @@ const LoginPage: React.FC = () => {
                                 {errors.password.message}
                               </div>
                             )}
-                            {isLoading && (
-                              <Box sx={{ mt: 2, mb: 2 }}>
-                                <PrettoSlider
-                                  valueLabelDisplay="auto"
-                                  aria-label="pretto slider"
-                                  defaultValue={0}
-                                  value={loadingPercent}
-                                  sx={{ 
-                                    pointerEvents: 'none',
-                                    '& .MuiSlider-track': {
-                                      transition: 'width 0.1s ease-in-out',
-                                    }
-                                  }}
-                                />
-                                <Typography 
-                                  variant="h6" 
-                                  align="center" 
-                                  sx={{ 
-                                    // marginTop: { md: '10px', sm: '10px', xs: '10px' },
-                                    color: '#52af77',
-                                    fontWeight: 500
-                                  }}
-                                >
-                                  Loading {loadingPercent}%
-                                </Typography>
-                              </Box>
-                            )}
+                            {isLoading && <LoadingProgress percent={loadingPercent} />}
                           </div>
 
                           <button 
